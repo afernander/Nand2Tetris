@@ -1,0 +1,14 @@
+CHIP Not8 {
+    IN in[8];
+    OUT out[8];
+
+    PARTS:
+    Nand (a=in[0], b=true, out=out[0]);
+    Nand (a=in[1], b=true, out=out[1]);
+    Nand (a=in[2], b=true, out=out[2]);
+    Nand (a=in[3], b=true, out=out[3]);
+    Nand (a=in[4], b=true, out=out[4]);
+    Nand (a=in[5], b=true, out=out[5]);
+    Nand (a=in[6], b=true, out=out[6]);
+    Nand (a=in[7], b=true, out=out[7]);
+}
