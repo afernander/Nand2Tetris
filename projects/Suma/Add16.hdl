@@ -1,0 +1,26 @@
+CHIP Add16{
+    IN a[16], b[16] ;  
+    OUT out[16] ;
+
+    PARTS:
+
+    Suma(a=a[0],b=b[0],out=out[0],carry=carry0);
+    SumaC(a=a[1],b=b[1],carry=carry0,out=out[1],carryout=carry1);
+    SumaC(a=a[2],b=b[2],carry=carry1,out=out[2],carryout=carry2);
+    SumaC(a=a[3],b=b[3],carry=carry2,out=out[3],carryout=carry3);
+    SumaC(a=a[4],b=b[4],carry=carry3,out=out[4],carryout=carry4);
+    SumaC(a=a[5],b=b[5],carry=carry4,out=out[5],carryout=carry5);
+    SumaC(a=a[6],b=b[6],carry=carry5,out=out[6],carryout=carry6);
+    SumaC(a=a[7],b=b[7],carry=carry6,out=out[7],carryout=carry7);
+    SumaC(a=a[8],b=b[8],carry=carry7,out=out[8],carryout=carry8);
+    SumaC(a=a[9],b=b[9],carry=carry8,out=out[9],carryout=carry9);
+    SumaC(a=a[10],b=b[10],carry=carry9,out=out[10],carryout=carry10);
+    SumaC(a=a[11],b=b[11],carry=carry10,out=out[11],carryout=carry11);
+    SumaC(a=a[12],b=b[12],carry=carry11,out=out[12],carryout=carry12);
+    SumaC(a=a[13],b=b[13],carry=carry12,out=out[13],carryout=carry13);
+    SumaC(a=a[14],b=b[14],carry=carry13,out=out[14],carryout=carry14);
+    SumaC(a=a[15],b=b[15],carry=carry14,out=out[15],carryout=carry15);
+   
+
+
+}

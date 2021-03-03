@@ -1,0 +1,10 @@
+CHIP FNand{
+    IN a , b ;
+    OUT out;
+
+    PARTS:
+    Nand(a=a ,b=b, out=out);
+    
+    
+
+}

@@ -1,0 +1,14 @@
+CHIP SumaC {
+
+    IN a, b, carry;  
+    OUT out, carryout ;
+
+    PARTS:
+    Suma(a=a,b=b,out=out0,carry=carryout);
+
+    Xor(a=out0,b=carry,out=out);
+    
+   
+
+
+}

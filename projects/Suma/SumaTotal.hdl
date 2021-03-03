@@ -1,0 +1,17 @@
+CHIP SumaTotal {
+
+    IN a[6], b[6],carry ;  
+    OUT out[7] ;
+
+    PARTS:
+
+    SumaC(a=a[0],b=b[0],carry=carry,out=out[0],carryout=carry0);
+    SumaC(a=a[1],b=b[1],carry=carry0,out=out[1],carryout=carry1);
+    SumaC(a=a[2],b=b[2],carry=carry1,out=out[2],carryout=carry2);
+    SumaC(a=a[3],b=b[3],carry=carry2,out=out[3],carryout=carry3);
+    SumaC(a=a[4],b=b[4],carry=carry3,out=out[4],carryout=carry4);
+    SumaC(a=a[5],b=b[5],carry=carry4,out=out[5],carryout=out[6]);
+   
+
+
+}

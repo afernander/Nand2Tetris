@@ -1,0 +1,54 @@
+(KEY_EVENT)
+    @KBD
+    D=M
+    @KEY_EVENT
+    D;JEQ
+(BLACK)
+    @8193
+    D=A
+    @limit
+    M=D
+    @i
+    M=0
+(BLACK_LOOP)
+    @limit
+    M = M-1
+    D=M
+    @KEY_PUSHED_EVENT
+    D;JLE
+    @SCREEN
+    D=A
+    @i
+    A=D+M
+    M=-1
+    @i
+    M=M+1
+    @BLACK_LOOP
+    0;JMP
+(KEY_PUSHED_EVENT)
+    @KBD
+    D=M
+    @KEY_PUSHED_EVENT
+    D;JNE
+(WHITE)
+    @8193
+    D=A
+    @limit
+    M=D
+    @i
+    M=0
+(WHITE_LOOP)
+    @limit
+    M=M-1
+    D=M
+    @KEY_EVENT
+    D;JLE
+    @SCREEN
+    D=A
+    @i
+    A=D+M
+    M=0
+    @i
+    M=M+1
+    @WHITE_LOOP
+    0;JMP
