@@ -1,0 +1,398 @@
+function PongGame.new 0
+push constant 11
+call Memory.alloc 1
+pop pointer 0
+push constant 30
+push constant 90
+push constant 30
+push constant 255
+call Player.new 4
+pop this 7
+push constant 476
+push constant 90
+push constant 30
+push constant 255
+call Player.new 4
+pop this 8
+push constant 0
+push constant 0
+push constant 510
+push constant 33
+push constant 255
+call Scoreboard.new 5
+pop this 10
+push constant 250
+push constant 125
+push constant 35
+push constant 253
+call Ball.new 4
+pop this 9
+push constant 0
+pop this 0
+push constant 0
+pop this 1
+push pointer 0
+return
+function PongGame.dispose 0
+push argument 0
+pop pointer 0
+push this 7
+call Player.dispose 1
+pop temp 0
+push this 8
+call Player.dispose 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function PongGame.run 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+not
+not
+if-goto WHILE_END0
+push this 9
+call Ball.move 1
+pop temp 0
+call Keyboard.keyPressed 0
+pop local 0
+push pointer 0
+call PongGame.movePlayers 1
+pop temp 0
+push pointer 0
+call PongGame.checkpoints 1
+pop temp 0
+push local 0
+push constant 81
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+pop local 1
+label IF_FALSE0
+push local 0
+push constant 131
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+pop this 0
+label IF_FALSE1
+push local 0
+push constant 133
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 1
+pop this 0
+label IF_FALSE2
+push local 0
+push constant 87
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 0
+pop this 1
+label IF_FALSE3
+push local 0
+push constant 83
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 1
+pop this 1
+label IF_FALSE4
+push this 7
+call Player.getX2 1
+push this 9
+call Ball.getX1 1
+gt
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push this 7
+call Player.getY1 1
+push this 9
+call Ball.getY 1
+lt
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push this 9
+call Ball.getY 1
+push this 7
+call Player.getY2 1
+lt
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push this 9
+call Ball.getX2 1
+push this 7
+call Player.getX1 1
+lt
+not
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push this 9
+call Ball.bounceInX 1
+pop temp 0
+push this 7
+call Player.erase 1
+pop temp 0
+push this 7
+call Player.big 1
+pop temp 0
+push this 7
+call Player.draw 1
+pop temp 0
+label IF_FALSE8
+label IF_FALSE7
+label IF_FALSE6
+label IF_FALSE5
+push this 8
+call Player.getX1 1
+push this 9
+call Ball.getX2 1
+lt
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
+push this 8
+call Player.getY1 1
+push this 9
+call Ball.getY 1
+lt
+if-goto IF_TRUE10
+goto IF_FALSE10
+label IF_TRUE10
+push this 9
+call Ball.getY 1
+push this 8
+call Player.getY2 1
+lt
+if-goto IF_TRUE11
+goto IF_FALSE11
+label IF_TRUE11
+push this 9
+call Ball.getX1 1
+push this 8
+call Player.getX2 1
+gt
+not
+if-goto IF_TRUE12
+goto IF_FALSE12
+label IF_TRUE12
+push this 9
+call Ball.bounceInX 1
+pop temp 0
+push this 7
+call Player.erase 1
+pop temp 0
+push this 8
+call Player.big 1
+pop temp 0
+push this 7
+call Player.draw 1
+pop temp 0
+label IF_FALSE12
+label IF_FALSE11
+label IF_FALSE10
+label IF_FALSE9
+push this 9
+call Ball.getX2 1
+push constant 505
+gt
+if-goto IF_TRUE13
+goto IF_FALSE13
+label IF_TRUE13
+push this 10
+call Scoreboard.incP1Score 1
+pop temp 0
+push this 9
+call Ball.restart 1
+pop temp 0
+push this 8
+call Player.erase 1
+pop temp 0
+push this 8
+call Player.normal 1
+pop temp 0
+push this 8
+call Player.draw 1
+pop temp 0
+label IF_FALSE13
+push this 9
+call Ball.getX1 1
+push constant 6
+lt
+if-goto IF_TRUE14
+goto IF_FALSE14
+label IF_TRUE14
+push this 10
+call Scoreboard.incP2Score 1
+pop temp 0
+push this 9
+call Ball.restart 1
+pop temp 0
+push this 7
+call Player.erase 1
+pop temp 0
+push this 7
+call Player.normal 1
+pop temp 0
+push this 7
+call Player.draw 1
+pop temp 0
+label IF_FALSE14
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function PongGame.movePlayers 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 7
+call Player.moveUp 1
+pop temp 0
+label IF_FALSE0
+push this 0
+push constant 1
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 7
+call Player.moveDown 1
+pop temp 0
+label IF_FALSE1
+push this 1
+push constant 0
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 8
+call Player.moveUp 1
+pop temp 0
+label IF_FALSE2
+push this 1
+push constant 1
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push this 8
+call Player.moveDown 1
+pop temp 0
+label IF_FALSE3
+push constant 80
+call Sys.wait 1
+pop temp 0
+push constant 0
+return
+function PongGame.checkpoints 0
+push argument 0
+pop pointer 0
+push this 10
+call Scoreboard.p1Score 1
+pop this 2
+push this 10
+call Scoreboard.p2Score 1
+pop this 3
+push this 2
+push this 3
+sub
+pop this 4
+push this 4
+push constant 2
+neg
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 9
+call Ball.getX1 1
+push constant 255
+lt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 9
+call Ball.erase 1
+pop temp 0
+push this 9
+call Ball.big 1
+pop temp 0
+push this 9
+call Ball.draw 1
+pop temp 0
+goto IF_END1
+label IF_FALSE1
+push this 9
+call Ball.erase 1
+pop temp 0
+push this 9
+call Ball.normal 1
+pop temp 0
+push this 9
+call Ball.draw 1
+pop temp 0
+label IF_END1
+label IF_FALSE0
+push this 4
+push constant 2
+gt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 9
+call Ball.getX1 1
+push constant 255
+gt
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push this 9
+call Ball.erase 1
+pop temp 0
+push this 9
+call Ball.big 1
+pop temp 0
+push this 9
+call Ball.draw 1
+pop temp 0
+goto IF_END3
+label IF_FALSE3
+push this 9
+call Ball.erase 1
+pop temp 0
+push this 9
+call Ball.normal 1
+pop temp 0
+push this 9
+call Ball.draw 1
+pop temp 0
+label IF_END3
+label IF_FALSE2
+push constant 0
+return

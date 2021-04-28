@@ -1,0 +1,89 @@
+class Player {
+
+    // Location on the screen
+    field int x, y;
+    field int TOP_LIMIT, BOTTOM_LIMIT;
+
+    field int velocity;
+
+    // The size of the palette
+    field int size;
+
+    // Constructs a new square with a given location and size.
+    constructor Player new(int Ax, int Ay, int Atop_limit, int Abottom_limit) {
+        let x = Ax;
+        let y = Ay;
+        let size = 35;
+        let velocity = 7; // Pixels to move forward
+        let TOP_LIMIT = Atop_limit;
+        let BOTTOM_LIMIT = Abottom_limit;
+
+        do draw();
+
+        return this;
+    }
+
+    // Deallocates the object's memory.
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    // Draws the palette on the screen.
+    method void draw() {
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x, y, x + 4, y + size);
+        return;
+    }
+
+    // Erases the palette from the screen.
+    method void erase() {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x, y, x + 4, y + size);
+        return;
+    }
+
+    method void moveUp() {
+        if (y - velocity > TOP_LIMIT) {
+            do erase();
+            let y = y - velocity;
+            do draw();
+        }
+        return;
+    }
+
+    method void moveDown() {
+        if (y + size + velocity < BOTTOM_LIMIT) {
+            do erase();
+            let y = y + velocity;
+            do draw();
+        }
+        return;
+    }
+
+    method void big(){
+        let size =size +1;
+        return;
+    }
+
+    method void normal(){
+        let size = 35;
+        return;
+    }
+
+    method int getX1() {
+        return x;
+    }
+    
+    method int getX2() {
+        return x + 4;
+    }
+
+    method int getY1() {
+        return y;
+    }
+    
+    method int getY2() {
+        return y + size;
+    }
+}

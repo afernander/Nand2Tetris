@@ -1,0 +1,54 @@
+class Scoreboard {
+    field int p1_score, p2_score;
+
+    field int border_size;
+
+    constructor Scoreboard new(int x1, int y1, int x2, int y2, int m) {
+        let p1_score = 0;
+        let p2_score = 0;
+        let border_size = 3;
+        do draw(x1, y1, x2, y2, m);
+        do update();
+        return this;
+    }
+
+    method void draw(int x1, int y1, int x2, int y2, int m) {
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x1, y1, x2, y2);
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x1+border_size, y1+border_size, m-2, y2-border_size);
+        do Screen.setColor(false);
+        do Screen.drawRectangle(m+2, y1+border_size, x2-border_size, y2-border_size);
+        return;
+    }
+
+    method void update() {
+        do Output.moveCursor(1,1);
+        do Output.printString("P1: ");
+        do Output.printInt(p1_score);
+        do Output.moveCursor(1,57);
+        do Output.printString("P2: ");
+        do Output.printInt(p2_score);
+        return;
+    }
+
+    method void incP1Score() {
+        let p1_score = p1_score + 1;
+        do update();
+        return;
+    }
+
+    method int p1Score(){
+        return p1_score;
+    }
+    
+    method void incP2Score(){
+        let p2_score = p2_score + 1;
+        do update();
+        return;
+    }
+
+    method int p2Score(){
+        return p2_score;
+    }
+}

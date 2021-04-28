@@ -1,0 +1,135 @@
+class PongGame {
+
+    field int p1_direction, p2_direction, p1s, p2s, dif;
+    field boolean p1b, p2b;
+
+    field Player p1;
+    field Player p2;
+    field Ball ball;
+    field Scoreboard scoreboard;
+
+    constructor PongGame new() {
+        let p1 = Player.new(30, 90, 30, 255);
+        let p2 = Player.new(476, 90, 30, 255);
+        let scoreboard = Scoreboard.new(0,0,510,33,255);
+        let ball = Ball.new(250, 125, 35, 253);
+        let p1_direction = 0;
+        let p2_direction = 0;
+        return this;
+    }
+
+    method void dispose() {
+        do p1.dispose();
+        do p2.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void run() {
+        var char key; // the key currently pressed by the user
+        var boolean exit;
+        let exit = false;
+        while (~exit) {
+            do ball.move();
+            let key = Keyboard.keyPressed();
+            do movePlayers();
+            do checkpoints();
+
+            if (key = 81) { let exit = true; } // q key
+            if (key = 131) { let p1_direction = 0; } // up arrow
+            if (key = 133) { let p1_direction = 1; } // down arrow
+            if (key = 87) { let p2_direction = 0; } // w arrow
+            if (key = 83) { let p2_direction = 1; } // s arrow
+
+            if (p1.getX2() > ball.getX1()) {
+                if (p1.getY1() < ball.getY()) {
+                    if (ball.getY() < p1.getY2()) {
+                        if (~(ball.getX2() < p1.getX1())){
+                            do ball.bounceInX();
+                            do p1.erase();
+                            do p1.big();
+                            do p1.draw();
+                        }
+                    }
+                }
+            }
+            if (p2.getX1() < ball.getX2()) {
+                if (p2.getY1() < ball.getY()) {
+                    if (ball.getY() < p2.getY2()) {
+                        if (~(ball.getX1() > p2.getX2())){
+                            do ball.bounceInX();
+                            do p1.erase();
+                            do p2.big();
+                            do p1.draw();
+                        }
+                    }
+                }
+            }
+
+            if (ball.getX2() > 505) {
+                
+                do scoreboard.incP1Score();
+                do ball.restart();
+                do  p2.erase();
+                do p2.normal();
+                do p2.draw();
+            }
+            if (ball.getX1() < 6) {
+                
+                do scoreboard.incP2Score();
+                do ball.restart();
+                do p1.erase();
+                do p1.normal();
+                do p1.draw();
+            }
+        }
+        return;
+    }
+
+    method void movePlayers() {
+        if (p1_direction = 0) { do p1.moveUp(); }
+        if (p1_direction = 1) { do p1.moveDown(); }
+        
+        if (p2_direction = 0) { do p2.moveUp(); }
+        if (p2_direction = 1) { do p2.moveDown(); }
+
+        do Sys.wait(80);
+        return;
+    }
+
+    
+    
+
+    method void checkpoints(){
+        let p1s = scoreboard.p1Score();
+        let p2s = scoreboard.p2Score();
+        let dif = p1s - p2s;
+
+        if(dif < -2){
+            if(ball.getX1() <255){
+                do ball.erase();
+                do ball.big();
+                do ball.draw();
+            }else{
+                do ball.erase();
+                do ball.normal();
+                do ball.draw();
+            }
+            
+        }
+        if(dif > 2){
+            if(ball.getX1() >255){
+                do ball.erase();
+                do ball.big();
+                do ball.draw();
+            }else{
+                do ball.erase();
+                do ball.normal();
+                do ball.draw();
+            }
+        }
+        return;
+
+    }
+
+}

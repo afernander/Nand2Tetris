@@ -1,0 +1,99 @@
+class Ball {
+    
+    field int x, y;
+    field int def_x, def_y;
+    field int dx, dy;
+    field int velocity;
+    field int size;
+
+    field int TOP_LIMIT, BOTTOM_LIMIT;
+
+    constructor Ball new(int Ax, int Ay, int Atop_limit, int Abottom_limit) {
+        let x = Ax;
+        let y = Ay;
+        let def_x = Ax;
+        let def_y = Ay;
+        let dx = 5;
+        let dy = 5;
+        let size = 5;
+        let TOP_LIMIT = Atop_limit;
+        let BOTTOM_LIMIT = Abottom_limit;
+        do draw();
+
+        return this;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void draw() {
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x, y, x + size, y + size);
+        return;
+    }
+
+    method void erase() {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x, y, x + size, y + size);
+        return;
+    }
+
+    method void move() {
+        /*
+        if (dx > 0) {
+            if (x + size + dx > 510) { let dx = -dx; }
+        }
+        if (dx < 0) {
+            if (x + dx < 2) { let dx = -dx; }
+        }*/
+
+        if (dy > 0) {
+            if (y + size + dy > BOTTOM_LIMIT) { let dy = -dy; }
+        }
+        if (dy < 0) {
+            if (y + dy < TOP_LIMIT) { let dy = -dy; }
+        }
+        
+        do erase();
+        let x = x + dx;
+        let y = y + dy;
+        do draw();
+        return;
+    }
+
+    method void restart() {
+        do erase();
+        let x = def_x;
+        let y = def_y;
+        return;
+    }
+
+    method void bounceInX() {
+        let dx = -dx;
+        return;
+    }
+
+    method void big(){
+        let size =10;
+        return;
+    }
+
+    method void normal(){
+        let size =5;
+        return ;
+    }
+
+    method int getX1() {
+        return x;
+    }
+    
+    method int getX2() {
+        return x + size;
+    }
+
+    method int getY() {
+        return y;
+    }
+}

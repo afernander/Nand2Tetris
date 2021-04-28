@@ -1,0 +1,182 @@
+function Ball.new 0
+push constant 10
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push argument 0
+pop this 2
+push argument 1
+pop this 3
+push constant 5
+pop this 4
+push constant 5
+pop this 5
+push constant 5
+pop this 7
+push argument 2
+pop this 8
+push argument 3
+pop this 9
+push pointer 0
+call Ball.draw 1
+pop temp 0
+push pointer 0
+return
+function Ball.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Ball.draw 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push this 7
+add
+push this 1
+push this 7
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Ball.erase 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push this 7
+add
+push this 1
+push this 7
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Ball.move 0
+push argument 0
+pop pointer 0
+push this 5
+push constant 0
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 1
+push this 7
+add
+push this 5
+add
+push this 9
+gt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 5
+neg
+pop this 5
+label IF_FALSE1
+label IF_FALSE0
+push this 5
+push constant 0
+lt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 1
+push this 5
+add
+push this 8
+lt
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push this 5
+neg
+pop this 5
+label IF_FALSE3
+label IF_FALSE2
+push pointer 0
+call Ball.erase 1
+pop temp 0
+push this 0
+push this 4
+add
+pop this 0
+push this 1
+push this 5
+add
+pop this 1
+push pointer 0
+call Ball.draw 1
+pop temp 0
+push constant 0
+return
+function Ball.restart 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Ball.erase 1
+pop temp 0
+push this 2
+pop this 0
+push this 3
+pop this 1
+push constant 0
+return
+function Ball.bounceInX 0
+push argument 0
+pop pointer 0
+push this 4
+neg
+pop this 4
+push constant 0
+return
+function Ball.big 0
+push argument 0
+pop pointer 0
+push constant 10
+pop this 7
+push constant 0
+return
+function Ball.normal 0
+push argument 0
+pop pointer 0
+push constant 5
+pop this 7
+push constant 0
+return
+function Ball.getX1 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Ball.getX2 0
+push argument 0
+pop pointer 0
+push this 0
+push this 7
+add
+return
+function Ball.getY 0
+push argument 0
+pop pointer 0
+push this 1
+return

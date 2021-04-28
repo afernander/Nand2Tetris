@@ -1,0 +1,149 @@
+function Scoreboard.new 0
+push constant 3
+call Memory.alloc 1
+pop pointer 0
+push constant 0
+pop this 0
+push constant 0
+pop this 1
+push constant 3
+pop this 2
+push pointer 0
+push argument 0
+push argument 1
+push argument 2
+push argument 3
+push argument 4
+call Scoreboard.draw 6
+pop temp 0
+push pointer 0
+call Scoreboard.update 1
+pop temp 0
+push pointer 0
+return
+function Scoreboard.draw 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push argument 1
+push argument 2
+push argument 3
+push argument 4
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push argument 1
+push this 2
+add
+push argument 2
+push this 2
+add
+push argument 5
+push constant 2
+sub
+push argument 4
+push this 2
+sub
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push argument 5
+push constant 2
+add
+push argument 2
+push this 2
+add
+push argument 3
+push this 2
+sub
+push argument 4
+push this 2
+sub
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+return
+function Scoreboard.update 0
+push argument 0
+pop pointer 0
+push constant 1
+push constant 1
+call Output.moveCursor 2
+pop temp 0
+push constant 4
+call String.new 1
+push constant 80
+call String.appendChar 2
+push constant 49
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 0
+call Output.printInt 1
+pop temp 0
+push constant 1
+push constant 57
+call Output.moveCursor 2
+pop temp 0
+push constant 4
+call String.new 1
+push constant 80
+call String.appendChar 2
+push constant 50
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push this 1
+call Output.printInt 1
+pop temp 0
+push constant 0
+return
+function Scoreboard.incP1Score 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 1
+add
+pop this 0
+push pointer 0
+call Scoreboard.update 1
+pop temp 0
+push constant 0
+return
+function Scoreboard.p1Score 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Scoreboard.incP2Score 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 1
+add
+pop this 1
+push pointer 0
+call Scoreboard.update 1
+pop temp 0
+push constant 0
+return
+function Scoreboard.p2Score 0
+push argument 0
+pop pointer 0
+push this 1
+return
